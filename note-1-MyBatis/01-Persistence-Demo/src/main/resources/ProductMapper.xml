@@ -1,0 +1,13 @@
+<mapper namespace="product">
+  <select id="selectList" resultType="com.example.pojo.Product">
+    SELECT *
+    FROM product
+    WHERE id = #{id}
+  </select>
+  <select id="selectOne">
+    select *
+    from product
+    where id = ?
+      and username = ?
+  </select>
+</mapper>
