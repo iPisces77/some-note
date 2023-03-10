@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.account.mapper.OrderMapper">
+  <select id="findAll" resultType="org.example.pojo.User">
+    select *
+    from user
+  </select>
+  <insert id="saveUser" parameterType="org.example.pojo.User">
+    insert into user (id, username)
+    values (#{id}, #{username})
+  </insert>
+  <update id="updateUser" parameterType="org.example.pojo.User">
+    update user
+    set username = #{username}
+    where id = #{id}
+  </update>
+  <delete id="deleteUser" parameterType="integer">
+    delete
+    from user
+    where id = #{id}
+  </delete>
+
+  <select id="findByCondition" resultType="org.example.pojo.User">
+    select *
+    from user
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="username != username != null and username != ''">
+        and username = #{username}
+      </if>
+    </where>
+  </select>
+
+  <select id="findByIds" resultType="org.example.pojo.User">
+    select *
+    from user
+    where id in
+    <foreach collection="list" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+
+</mapper>
